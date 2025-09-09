@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Książki (Admin)";
+}
+<h2>Książki (Admin)</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Rok</th>
+            <th>ISBN</th>
+            <th>Egsz.</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var k in Model.Books)
+        {
+        <tr>
+            <td>@k.Id</td>
+            <td>@k.Tytul</td>
+            <td>@k.Autor</td>
+            <td>@k.Rok</td>
+            <td>@k.ISBN</td>
+            <td>@k.LiczbaEgzemplarzy</td>
+        </tr>
+        }
+    </tbody>
+</table>

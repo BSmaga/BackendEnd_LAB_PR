@@ -1,0 +1,40 @@
+﻿@page
+@model Biblioteka.Razor.Pages.Books.IndexModel
+@{
+    ViewData["Title"] = "Książki";
+}
+<h2>Książki</h2>
+
+<form method="get" class="mb-3">
+    <input type="text" name="q" value="@Model.Q" placeholder="Szukaj..." />
+    <button class="btn btn-secondary btn-sm">Szukaj</button>
+    @if (User.IsInRole("Admin"))
+    {
+    <a asp-page="Create" class="btn btn-primary btn-sm ms-2">Dodaj</a>
+    }
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr><th>Tytuł</th><th>Autor</th><th>Rok</th><th>ISBN</th><th>Egz.</th><th></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var k in Model.Data?.Items ?? new List<BookDto>())
+    {
+        <tr>
+            <td>@k.Tytul</td>
+            <td>@k.Autor</td>
+            <td>@k.Rok</td>
+            <td>@k.ISBN</td>
+            <td>@k.LiczbaEgzemplarzy</td>
+            <td class="text-end">
+                @if (User.IsInRole("Admin"))
+                {
+                <a asp-page="Edit" asp-route-id="@k.Id" class="btn btn-sm btn-outline-secondary">Edytuj</a>
+                <a asp-page="Delete" asp-route-id="@k.Id" class="btn btn-sm btn-outline-danger ms-1">Usuń</a>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

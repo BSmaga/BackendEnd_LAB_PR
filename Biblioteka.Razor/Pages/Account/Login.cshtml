@@ -1,0 +1,19 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Logowanie";
+}
+<h2>Logowanie</h2>
+
+<form method="post" class="mt-3">
+    <div class="mb-2">
+        <label class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Hasło</label>
+        <input asp-for="Haslo" type="password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Zaloguj</button>
+    <span class="text-danger ms-3">@Model.Error</span>
+</form>

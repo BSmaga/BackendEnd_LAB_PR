@@ -1,0 +1,35 @@
+﻿@page "{id:int}"
+@model Biblioteka.Razor.Pages.Admin.Books.EditModel
+
+@{
+    ViewData["Title"] = "Edycja książki";
+}
+<h2>Edycja książki</h2>
+
+<form method="post" class="row g-3">
+    <input asp-for="Form.Id" type="hidden" />
+    <div class="col-md-6">
+        <label class="form-label">Tytuł</label>
+        <input asp-for="Form.Tytul" class="form-control" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Autor</label>
+        <input asp-for="Form.Autor" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Rok</label>
+        <input asp-for="Form.Rok" class="form-control" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">ISBN</label>
+        <input asp-for="Form.ISBN" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Egz.</label>
+        <input asp-for="Form.LiczbaEgzemplarzy" class="form-control" />
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary">Zapisz</button>
+        <a asp-page="Index" class="btn btn-link">Anuluj</a>
+    </div>
+</form>

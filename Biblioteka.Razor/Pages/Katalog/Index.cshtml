@@ -1,0 +1,13 @@
+@page
+@model KatalogIndex
+<h2>Katalog (GraphQL)</h2>
+<form method="get">
+    <input name="q" value="@Model.Query" placeholder="szukaj..." />
+    <button>Szukaj</button>
+</form>
+<ul>
+    @foreach (var b in Model.Items)
+{
+    <li><b>@b.Tytul</b> — @b.Autor (@b.Rok)</li>
+}
+</ul>

@@ -1,0 +1,17 @@
+﻿@page "{id:int}"
+@model Biblioteka.Razor.Pages.Admin.Books.DeleteModel
+
+@{
+    ViewData["Title"] = "Usuń książkę";
+}
+<h3>Czy na pewno usunąć?</h3>
+
+@if (Model.Item is not null)
+{
+<p><b>@Model.Item.Tytul</b> – @Model.Item.Autor (@Model.Item.Rok)</p>
+}
+
+<form method="post">
+    <button class="btn btn-danger">Usuń</button>
+    <a asp-page="Index" class="btn btn-secondary">Anuluj</a>
+</form>

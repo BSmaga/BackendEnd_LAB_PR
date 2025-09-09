@@ -1,0 +1,21 @@
+# Lista ksi¹¿ek (filtr + sort)
+query Books($search: String = "") {
+  ksiazki(
+    where: { or: [
+      { tytul: { contains: $search } }
+      { autor: { contains: $search } }
+      { isbn:  { contains: $search } }
+    ]},
+    order: { rok: DESC }
+  ) {
+    id tytul autor rok isbn liczbaEgzemplarzy
+  }
+}
+
+# Dodanie ksi¹¿ki
+mutation AddBook($t: String!, $a: String!, $rok: Int!, $isbn: String!, $ile: Int!) {
+  addKsiazka(input: { tytul: $t, autor: $a, rok: $rok, isbn: $isbn, liczbaEgzemplarzy: $ile }) {
+    id
+    tytul
+  }
+}

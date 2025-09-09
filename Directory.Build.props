@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <!-- wy³¹cz wbudowane .NET analyzers -->
+    <EnableNETAnalyzers>false</EnableNETAnalyzers>
+  </PropertyGroup>
+
+  <!-- wy³¹cz dostarczane przez EF Core analyzers (transitive) -->
+  <ItemGroup>
+    <PackageReference Update="Microsoft.EntityFrameworkCore.Analyzers"
+                      PrivateAssets="all"
+                      ExcludeAssets="all" />
+  </ItemGroup>
+</Project>
