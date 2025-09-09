@@ -13,12 +13,13 @@ public class TokenHandler : DelegatingHandler
         _store = store;
     }
 
-    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken ct)
+    protected override Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var token = _store.GetToken(_http.HttpContext!);
-        if (!string.IsNullOrWhiteSpace(token))
+        if (!string.IsNullOrEmpty(token))
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-        return base.SendAsync(request, ct);
+        return base.SendAsync(request, cancellationToken);
     }
 }

@@ -71,3 +71,4 @@ public class Mutation
         return true;
     }
 }
+public partial class Program { }

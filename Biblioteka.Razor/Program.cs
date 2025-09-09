@@ -1,10 +1,11 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Biblioteka.Razor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var cfg = builder.Configuration;
 
-
+// cookie auth
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(o =>
@@ -20,33 +21,24 @@ builder.Services.AddAuthorization(opt =>
     opt.AddPolicy("AdminOnly", p => p.RequireRole("Admin"));
 });
 
-
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<Biblioteka.Razor.Services.ITokenStore, Biblioteka.Razor.Services.CookieTokenStore>();
-builder.Services.AddTransient<Biblioteka.Razor.Services.TokenHandler>();
-
+builder.Services.AddScoped<ITokenStore, CookieTokenStore>();
+builder.Services.AddTransient<TokenHandler>();
 
 builder.Services.AddHttpClient("api", c =>
 {
-    c.BaseAddress = new Uri(cfg["Api:BaseUrl"]!);
-}).AddHttpMessageHandler<Biblioteka.Razor.Services.TokenHandler>();
-
-builder.Services.AddHttpClient("gql", c =>
-{
-    c.BaseAddress = new Uri(cfg["GraphQL:Endpoint"]!);
-});
+    c.BaseAddress = new Uri(cfg["Api:BaseUrl"]!); // np. http://localhost:5180/
+}).AddHttpMessageHandler<TokenHandler>();
 
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
-{
     app.UseExceptionHandler("/Error");
-}
+
 app.UseStaticFiles();
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 

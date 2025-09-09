@@ -6,8 +6,8 @@ public class CookieTokenStore : ITokenStore
 {
     private const string CookieName = "jwt";
 
-    public string? GetToken(HttpContext ctx)
-        => ctx.Request.Cookies.TryGetValue(CookieName, out var v) ? v : null;
+    public string? GetToken(HttpContext ctx) =>
+        ctx.Request.Cookies.TryGetValue(CookieName, out var v) ? v : null;
 
     public void SetToken(HttpContext ctx, string token)
     {

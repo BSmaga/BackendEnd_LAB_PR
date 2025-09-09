@@ -452,3 +452,4 @@ app.MapGet("/api/czytelnicy/me/wypozyczenia", async (AppDbContext db, ClaimsPrin
 }).RequireAuthorization();
 
 app.Run();
+public partial class Program { }
